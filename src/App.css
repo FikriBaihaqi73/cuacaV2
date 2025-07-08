@@ -1,12 +1,17 @@
+* {
+  box-sizing: border-box; /* Ensures consistent box model across all elements */
+}
+
 body {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   margin: 0;
+  padding: 20px; /* Add padding to prevent content from touching screen edges */
   /* background: #282a36; */ /* Latar belakang solid gelap */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  overflow: hidden;
+  overflow-x: hidden; /* Only hide horizontal overflow */
 }
 
 .main-container {
@@ -14,7 +19,7 @@ body {
   border-radius: 25px; /* Lebih membulat */
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Bayangan lebih lembut */
-  max-width: 980px; /* Lebih lebar dari sebelumnya */
+  max-width: 1024px; /* Slightly increase max-width for larger screens */
   width: 90%;
 }
 
@@ -24,7 +29,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 50px; /* Slightly increase default padding for larger screens */
   color: #fff;
   text-align: center;
   transition: background 0.5s ease;
@@ -36,7 +41,7 @@ body {
 .weather-detail-card {
   flex: 1.3;
   background-color: #282a36; /* Warna latar belakang gelap untuk detail, lebih gelap dari body */
-  padding: 40px;
+  padding: 50px; /* Slightly increase default padding for larger screens */
   color: #e0e0e0; /* Warna teks lebih terang */
   display: flex;
   flex-direction: column;
@@ -77,6 +82,7 @@ body {
   gap: 10px;
   margin-bottom: 30px;
   align-items: center;
+  justify-content: center; /* Center search box content */
 }
 
 .search-box .input {
@@ -91,6 +97,7 @@ body {
   outline: none;
   transition: border-color 0.3s ease, background-color 0.3s ease;
   text-align: center; /* Placeholder di tengah */
+  max-width: 300px; /* Limit input width */
 }
 
 .search-box .input:focus {
@@ -130,7 +137,7 @@ body {
 .weather-info-detail p {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 15px;
+  margin-bottom: 18px; /* Slightly increase spacing for better readability */
   font-size: 1.05em;
   padding-bottom: 0px;
   border-bottom: none; /* Hapus border-bottom */
@@ -155,15 +162,17 @@ body {
 /* Media Queries for responsiveness */
 @media (max-width: 768px) {
   .main-container {
+    margin-left: 10px;
     flex-direction: column;
     width: 95%;
     max-width: 500px; /* Batasi lebar di perangkat kecil */
+    align-items: center; /* Center items horizontally when stacked */
   }
 
   .weather-main-card,
   .weather-detail-card {
     min-height: auto;
-    padding: 30px;
+    padding: 40px; /* Adjusted padding for medium screens */
     width: 100%;
     border-radius: 0;
   }
@@ -177,7 +186,7 @@ body {
     border-bottom-right-radius: 0;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    padding: 30px; /* Kurangi padding untuk perangkat kecil */
+    padding: 30px; /* Adjusted padding */
   }
 
   .weather-detail-card {
@@ -185,7 +194,7 @@ body {
     border-top-right-radius: 0;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    padding: 30px; /* Kurangi padding untuk perangkat kecil */
+    padding: 30px; /* Adjusted padding */
   }
 
   .date-display p {
@@ -203,11 +212,11 @@ body {
   }
 
   .weather-main-card .temp {
-    font-size: 3.5em;
+    font-size: 3.8em; /* Adjusted font size */
   }
 
   .weather-main-card .description {
-    font-size: 1em;
+    font-size: 1.1em; /* Adjusted font size */
   }
 
   .search-box {
@@ -215,12 +224,60 @@ body {
     gap: 10px;
   }
 
+  .search-box .input {
+    width: 100%;
+    max-width: 250px; /* Adjust max-width for input on small screens */
+  }
+
   .search-box .button {
     width: 100%; /* Tombol ambil 100% lebar */
   }
 
   .weather-info-detail p {
-    font-size: 0.95em;
+    font-size: 1em;
+    margin-bottom: 15px; /* Adjusted margin for medium screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .weather-main-card {
+    padding: 30px; /* Adjusted padding for very small devices */
+  }
+
+  .weather-detail-card {
+    padding: 30px; /* Adjusted padding for very small devices */
+  }
+
+  .date-display p {
+    font-size: 1.6em; /* Adjusted font size */
+  }
+
+  .date-display .sub-date {
+    font-size: 0.85em; /* Adjusted font size */
+    margin-bottom: 15px;
+  }
+
+  .weather-main-card img {
+    width: 90px;
+    height: 90px;
+  }
+
+  .weather-main-card .temp {
+    font-size: 3.2em; /* Adjusted font size */
+  }
+
+  .weather-main-card .description {
+    font-size: 0.95em; /* Adjusted font size */
+  }
+
+  .search-box .input,
+  .search-box .button {
+    padding: 10px 15px;
+    font-size: 0.9em;
+  }
+
+  .weather-info-detail p {
+    font-size: 0.9em;
     margin-bottom: 12px;
   }
 }
