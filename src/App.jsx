@@ -28,10 +28,31 @@ function getWeatherIcon(iconCode) {
 function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [city, setCity] = useState("Jakarta"); // Default city to Jakarta
-  const [searchCity, setSearchCity] = useState("Jakarta"); // State for search input
+  const [searchCity, setSearchCity] = useState(""); // State for search input
   const [error, setError] = useState(null);
   const [currentDate, setCurrentDate] = useState("");
   const [mainCardBackground, setMainCardBackground] = useState("linear-gradient(135deg, #74b9ff, #0984e3)"); // Default background
+
+  // Function to get city name from coordinates (reverse geocoding)
+  const getCityNameFromCoordinates = async (latitude, longitude) => {
+      try {
+          const geoApiUrl = `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${import.meta.env.VITE_WEATHER_API_KEY}`;
+          const response = await fetch(geoApiUrl);
+          if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const data = await response.json();
+          if (data && data.length > 0) {
+              setCity(data[0].name);
+              setSearchCity(data[0].name); // Also update searchCity to reflect the current location
+          } else {
+              setError("City not found for your location.");
+          }
+      } catch (error) {
+          console.error("Error fetching city name:", error);
+          setError("Could not retrieve city for your location.");
+      }
+  };
 
   const checkWeather = async (cityName) => {
     try {
@@ -89,6 +110,22 @@ function App() {
       setMainCardBackground("linear-gradient(135deg, #74b9ff, #0984e3)"); // Reset background on error
     }
   };
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                getCityNameFromCoordinates(position.coords.latitude, position.coords.longitude);
+            },
+            (err) => {
+                console.error("Error getting geolocation:", err);
+                setError("Geolocation denied or unavailable. Please search for a city manually.");
+            }
+        );
+    } else {
+        setError("Geolocation is not supported by your browser. Please search for a city manually.");
+    }
+  }, []);
 
   useEffect(() => {
     checkWeather(city);
