@@ -1,0 +1,226 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  /* background: #282a36; */ /* Latar belakang solid gelap */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+}
+
+.main-container {
+  display: flex;
+  border-radius: 25px; /* Lebih membulat */
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Bayangan lebih lembut */
+  max-width: 980px; /* Lebih lebar dari sebelumnya */
+  width: 90%;
+}
+
+.weather-main-card {
+  flex: 0.7; /* Beri sedikit lebih banyak ruang untuk kartu utama */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  color: #fff;
+  text-align: center;
+  transition: background 0.5s ease;
+  min-height: 550px; /* Tinggi minimum yang disesuaikan */
+  position: relative;
+  z-index: 1;
+}
+
+.weather-detail-card {
+  flex: 1.3;
+  background-color: #282a36; /* Warna latar belakang gelap untuk detail, lebih gelap dari body */
+  padding: 40px;
+  color: #e0e0e0; /* Warna teks lebih terang */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  z-index: 0;
+}
+
+.date-display p {
+  font-size: 2.2em;
+  font-weight: 700;
+  margin-bottom: 5px;
+  opacity: 0.95;
+}
+
+.date-display .sub-date {
+  font-size: 0.9em;
+  opacity: 0.7;
+  margin-bottom: 30px;
+}
+
+.weather-main-card .temp {
+  font-size: 4.5em;
+  font-weight: bold;
+  margin: 10px 0 5px;
+}
+
+.weather-main-card .description {
+  font-size: 1.2em;
+  text-transform: capitalize;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+.search-box {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  margin-bottom: 30px;
+  align-items: center;
+}
+
+.search-box .input {
+  flex-grow: 1;
+  padding: 12px 15px;
+  border-radius: 8px; /* Sudut lebih membulat */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Batas sangat halus */
+  background-color: rgba(255, 255, 255, 0.05); /* Latar belakang lebih transparan */
+  color: #fff;
+  font-size: 1em;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+  outline: none;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  text-align: center; /* Placeholder di tengah */
+}
+
+.search-box .input:focus {
+  border-color: #6272a4; /* Warna fokus yang lembut */
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.search-box .input::placeholder {
+  color: rgba(255, 255, 255, 0.5); /* Warna placeholder */
+}
+
+.search-box .button {
+  padding: 12px 20px;
+  border-radius: 8px; /* Sudut lebih membulat */
+  border: none;
+  background-color: #6272a4; /* Warna biru-ungu gelap untuk tombol */
+  color: white;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+.search-box .button:hover {
+  background-color: #5a6691; /* Sedikit lebih gelap saat hover */
+  transform: translateY(-1px);
+}
+
+.error-message {
+  color: #ff6b6b;
+  margin-top: 10px;
+  font-size: 1em;
+  text-align: center;
+}
+
+.weather-info-detail p {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-size: 1.05em;
+  padding-bottom: 0px;
+  border-bottom: none; /* Hapus border-bottom */
+}
+
+.weather-info-detail p:last-child {
+  margin-bottom: 0;
+}
+
+.weather-info-detail span {
+  font-weight: 500;
+  color: #f8f8f2;
+}
+
+.weather-main-card img {
+  width: 180px;
+  height: 180px;
+  margin: 15px 0;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4)); /* Bayangan ikon */
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+    width: 95%;
+    max-width: 500px; /* Batasi lebar di perangkat kecil */
+  }
+
+  .weather-main-card,
+  .weather-detail-card {
+    min-height: auto;
+    padding: 30px;
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .main-container {
+    border-radius: 20px;
+  }
+
+  .weather-main-card {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding: 30px; /* Kurangi padding untuk perangkat kecil */
+  }
+
+  .weather-detail-card {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 30px; /* Kurangi padding untuk perangkat kecil */
+  }
+
+  .date-display p {
+    font-size: 1.8em;
+  }
+
+  .date-display .sub-date {
+    margin-bottom: 20px;
+  }
+
+  .weather-main-card img {
+    width: 120px;
+    height: 120px;
+    margin: 15px 0;
+  }
+
+  .weather-main-card .temp {
+    font-size: 3.5em;
+  }
+
+  .weather-main-card .description {
+    font-size: 1em;
+  }
+
+  .search-box {
+    flex-direction: column; /* Tumpuk input dan tombol di perangkat kecil */
+    gap: 10px;
+  }
+
+  .search-box .button {
+    width: 100%; /* Tombol ambil 100% lebar */
+  }
+
+  .weather-info-detail p {
+    font-size: 0.95em;
+    margin-bottom: 12px;
+  }
+}
